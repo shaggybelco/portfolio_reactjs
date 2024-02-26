@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom'
 
 export default function Navbar() {
-    const navigate = useNavigate();
 
-    const handleNavigate = (route: string) => {
-        navigate(route);
-    };
 
     const [activeSection, setActiveSection] = useState<string | null>(null);
 
@@ -18,9 +13,10 @@ export default function Navbar() {
             // Logic to determine the active section based on scroll position
             // Adjust the offset values as needed
             const sectionOffsets: Record<string, number> = {
-                section1: document.getElementById('section1')?.offsetTop || 0,
-                section2: document.getElementById('section2')?.offsetTop || 0,
-                section3: document.getElementById('section3')?.offsetTop || 0,
+                section1: document.getElementById('home')?.offsetTop || 0,
+                section2: document.getElementById('about')?.offsetTop || 0,
+                section3: document.getElementById('portfolio')?.offsetTop || 0,
+                section4: document.getElementById('contact')?.offsetTop || 0,
                 // Add more sections as needed
             };
 
@@ -28,17 +24,18 @@ export default function Navbar() {
 
             let activeSection: string | null = null;
 
-            if (scrollPosition < sectionOffsets.section2) {
-                activeSection = 'section2';
+            if (scrollPosition < 500) {
+                activeSection = "home";
+            } else if (scrollPosition < sectionOffsets.section2) {
+                activeSection = 'about';
             } else if (scrollPosition < sectionOffsets.section3) {
-                activeSection = 'section3';
+                activeSection = 'portfolio';
             } else {
-                activeSection = 'section3';
+                activeSection = 'contact';
             }
 
-            if(scrollPosition === 0)
-            {
-                activeSection ='';
+            if (scrollPosition === 0) {
+                activeSection = '';
             }
             setActiveSection(activeSection);
         };
@@ -52,29 +49,33 @@ export default function Navbar() {
         };
     }, []);
 
+    const handleScrollNav = (id: string) => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     return (
         <div className='bg-orange-800 sticky top-0'>
             <div className="navbar container mx-auto">
                 <div className="navbar-start">
-                    <a onClick={() => handleNavigate('/')} className='hidden md:block cursor-pointer black-ops text-xl'>Belco</a>
+                    <a onClick={() => handleScrollNav('home')} className='hidden md:block cursor-pointer black-ops text-xl'>Belco</a>
                     <div className="dropdown visible md:hidden">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li className={activeSection === 'section1' ? 'active' : ''}><NavLink to={'/'}>Homepage</NavLink></li>
-                            <li className={activeSection === 'section2' ? 'active' : ''}><NavLink to={'/portfolio'}>Portfolio</NavLink></li>
-                            <li className={activeSection === 'section3' ? 'active' : ''}><NavLink to={'/about'}>About</NavLink></li>
+                            <a onClick={() => handleScrollNav('about')} className={`btn btn-ghost ${activeSection === 'about' ? 'active' : ''}`}>About</a>
+                            <a onClick={() => handleScrollNav('portfolio')} className={`btn btn-ghost ${activeSection === 'portfolio' ? 'active' : ''}`}>Portfolio</a>
+                            <a onClick={() => handleScrollNav('contact')} className={`btn btn-ghost ${activeSection === 'contact' ? 'active' : ''}`} >Contact</a>
                         </ul>
                     </div>
                 </div>
                 <div className="navbar-center gap-2">
                     <div className='md:block hidden'>
-                        <NavLink className={`btn btn-ghost ${activeSection === 'section2' ? 'active' : ''}`} to={'/about'}>About</NavLink>
-                        <NavLink className={`btn btn-ghost ${activeSection === 'section3' ? 'active' : ''}`} to={'/portfolio'}>Portfolio</NavLink>
-                        <NavLink className={`btn btn-ghost ${activeSection === 'section4' ? 'active' : ''}`} to={'/contact'}>Contact</NavLink>
+                        <a onClick={() => handleScrollNav('about')} className={`btn btn-ghost ${activeSection === 'about' ? 'active' : ''}`}>About</a>
+                        <a onClick={() => handleScrollNav('portfolio')} className={`btn btn-ghost ${activeSection === 'portfolio' ? 'active' : ''}`}>Portfolio</a>
+                        <a onClick={() => handleScrollNav('contact')} className={`btn btn-ghost ${activeSection === 'contact' ? 'active' : ''}`} >Contact</a>
                     </div>
-                    <a onClick={() => handleNavigate('/')} className='visible md:hidden cursor-pointer black-ops text-xl'>Belco</a>
+                    <a onClick={() => handleScrollNav('home')} className='visible md:hidden cursor-pointer black-ops text-xl'>Belco</a>
                 </div>
                 <div className="navbar-end">
                     <label className="swap swap-rotate">

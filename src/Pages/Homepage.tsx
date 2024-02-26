@@ -5,7 +5,7 @@ import Porfolio from './Porfolio';
 export default function Homepage() {
   return (
     <>
-      <div className='bg-orange-800' id='section1'>
+      <div className='bg-orange-800' id='home'>
         <div className='md:h-auto flex items-start md:items-center flex-col-reverse md:flex-row py-40 gap-10 container mx-auto'>
           <div className='flex gap-5 flex-col flex-1'>
             <span className='text-5xl font-semibold font-sans black-ops flex flex-shrink-0'>I'M
@@ -36,10 +36,10 @@ export default function Homepage() {
           </div>
         </div>
       </div >
-      <section id='section2'>
+      <section id='about'>
         <About />
       </section>
-      <section id='section3'>
+      <section id='portfolio'>
         <Porfolio />
       </section>
     </>
