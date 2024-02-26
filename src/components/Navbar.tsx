@@ -13,6 +13,7 @@ export default function Navbar() {
     useEffect(() => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
+            console.log(scrollPosition);
 
             // Logic to determine the active section based on scroll position
             // Adjust the offset values as needed
@@ -23,16 +24,22 @@ export default function Navbar() {
                 // Add more sections as needed
             };
 
+            console.log(sectionOffsets);
+
             let activeSection: string | null = null;
 
             if (scrollPosition < sectionOffsets.section2) {
-                activeSection = 'section1';
-            } else if (scrollPosition < sectionOffsets.section3) {
                 activeSection = 'section2';
+            } else if (scrollPosition < sectionOffsets.section3) {
+                activeSection = 'section3';
             } else {
                 activeSection = 'section3';
             }
 
+            if(scrollPosition === 0)
+            {
+                activeSection ='';
+            }
             setActiveSection(activeSection);
         };
 
@@ -46,7 +53,7 @@ export default function Navbar() {
     }, []);
 
     return (
-        <div className='bg-orange-800 bg-fixed'>
+        <div className='bg-orange-800 sticky top-0'>
             <div className="navbar container mx-auto">
                 <div className="navbar-start">
                     <a onClick={() => handleNavigate('/')} className='hidden md:block cursor-pointer black-ops text-xl'>Belco</a>

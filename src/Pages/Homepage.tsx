@@ -1,5 +1,6 @@
 import programming from '../assets/programming.svg';
 import About from './About';
+import Porfolio from './Porfolio';
 
 export default function Homepage() {
   return (
@@ -37,6 +38,9 @@ export default function Homepage() {
       </div >
       <section id='section2'>
         <About />
+      </section>
+      <section id='section3'>
+        <Porfolio />
       </section>
     </>
   )
