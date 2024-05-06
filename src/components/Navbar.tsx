@@ -30,8 +30,10 @@ export default function Navbar() {
                 activeSection = 'about';
             } else if (scrollPosition < sectionOffsets.section3) {
                 activeSection = 'portfolio';
-            } else {
+            } else if (scrollPosition < sectionOffsets.section4){
                 activeSection = 'contact';
+            }else {
+                activeSection = ''
             }
 
             if (scrollPosition === 0) {

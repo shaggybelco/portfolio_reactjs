@@ -1,5 +1,6 @@
 import programming from '../assets/programming.svg';
 import About from './About';
+import Contact from './Contact';
 import Porfolio from './Porfolio';
 
 export default function Homepage() {
@@ -41,6 +42,9 @@ export default function Homepage() {
       </section>
       <section id='portfolio'>
         <Porfolio />
+      </section>
+      <section id='contact'>
+        <Contact />
       </section>
     </>
   )
